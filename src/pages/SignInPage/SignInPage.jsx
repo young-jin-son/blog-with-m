@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function SignInPage() {
   const API = process.env.REACT_APP_API_URL;
 
-  console.log(API);
+  console.log("API", API);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
