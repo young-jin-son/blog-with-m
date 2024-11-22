@@ -42,11 +42,11 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            cd hm-blog/frontend || exit
-            git pull origin main || exit  # 최신 코드 가져오기
+            cd /home/guest/hm-blog/frontend || exit
+            git pull origin main || exit
             npm ci || exit  # 의존성 설치
             npm run build || exit  # 빌드
-            pm2 restart blog-with-m || exit  # 애플리케이션 재시작
+            pm2 restart frontend || exit  # 애플리케이션 재시작
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
