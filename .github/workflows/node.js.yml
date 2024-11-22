@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            cd /home/guest/hm-blog/frontend || exit
+            cd hm-blog/frontend || exit
             git pull origin main || exit  # 최신 코드 가져오기
             npm ci || exit  # 의존성 설치
             npm run build || exit  # 빌드
