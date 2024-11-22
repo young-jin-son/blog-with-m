@@ -40,11 +40,11 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no -p ${{ secrets.DEPLOY_PORT }} ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            cd /path/to/your/project/directory || exit
+            cd /home/guest/hm-blog/frontend || exit
             git pull origin main || exit
             npm ci || exit
             npm run build || exit
-            pm2 restart your-app-name || exit
+            pm2 restart frontend || exit
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
