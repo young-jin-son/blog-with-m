@@ -1,5 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { SignInForm, SignInPageLayout } from "./SignInPage.styled";
+import Button from "../../components/Form/common/Button/Button";
 
 export default function SignInPage() {
   const API = process.env.REACT_APP_API_URL;
@@ -30,9 +32,9 @@ export default function SignInPage() {
   };
 
   return (
-    <div>
+    <SignInPageLayout>
       <h1>SIGNIN PAGE</h1>
-      <form onSubmit={(e) => onSubmitHandler(e)}>
+      <SignInForm onSubmit={(e) => onSubmitHandler(e)}>
         <input
           type="email"
           placeholder="이메일을 입력하세요."
@@ -46,8 +48,8 @@ export default function SignInPage() {
           value={password}
           onChange={(e) => passwordChangeHandler(e.target.value)}
         />
-        <button type="submit">로그인</button>
-      </form>
-    </div>
+        <Button type="submit" buttonContent="로그인"></Button>
+      </SignInForm>
+    </SignInPageLayout>
   );
 }
