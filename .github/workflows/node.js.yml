@@ -50,11 +50,11 @@ jobs:
             pid=$(lsof -t -i:$PORT) 
             if [ -n "$pid" ]; then
               echo "Port $PORT is in use. Killing process $pid"
-              kill -9 $pid || exit
+              kill -9 $pid
             fi
 
             # serve로 새로운 서버 실행
-            nohup npx serve -s build -l $PORT & || exit
+            nohup npx serve -s build -l $PORT &
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
