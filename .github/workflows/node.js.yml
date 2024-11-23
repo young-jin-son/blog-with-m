@@ -44,7 +44,7 @@ jobs:
             git pull origin main || exit
             npm ci || exit
             npm run build || exit
-            npx serve -s build -l 3000 || exit
+            npx serve -s build -l 30001 || exit
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
