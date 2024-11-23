@@ -3,8 +3,6 @@ name: Node.js CI/CD
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
 jobs:
   build:
@@ -54,7 +52,10 @@ jobs:
             fi
 
             # serve로 새로운 서버 실행
-            nohup npx serve -s build -l $PORT &
+            nohup npx serve -s build -l $PORT > serve.log 2>&1 &
+
+            # 프로세스를 SSH 세션과 분리
+            disown
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
