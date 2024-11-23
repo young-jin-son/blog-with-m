@@ -44,7 +44,17 @@ jobs:
             git pull origin main || exit
             npm ci || exit
             npm run build || exit
-            npx serve -s build -l 30001 || exit
+
+            # 이미 30001번 포트를 사용하고 있는 프로세스가 있으면 종료
+            PORT=30001
+            pid=$(lsof -t -i:$PORT) 
+            if [ -n "$pid" ]; then
+              echo "Port $PORT is in use. Killing process $pid"
+              kill -9 $pid || exit
+            fi
+
+            # serve로 새로운 서버 실행
+            nohup npx serve -s build -l $PORT & || exit
           EOF
         env:
           DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
